@@ -16,6 +16,7 @@ import {
 } from "react-native";
 import { Icon } from "react-native-elements";
 import firebase from "../config";
+import * as Animatable from "react-native-animatable";
 
 export default function Chat({ navigation, route }) {
   const database = firebase.database();
@@ -76,8 +77,7 @@ export default function Chat({ navigation, route }) {
         setMessages(arrayMsg);
       });
 
-      // get the receiver state
-      
+    // get the receiver state
 
     // Setting the header navigation value base on the data fetched
     navigation.setOptions({
@@ -199,7 +199,7 @@ export default function Chat({ navigation, route }) {
                 <View
                   style={{
                     maxWidth: Dimensions.get("screen").width * 0.8,
-                    backgroundColor: "#3a6ee8",
+                    backgroundColor: item.idReceiver === idSender ? '#d3d3d3'  :"#3a6ee8",
                     alignSelf:
                       item.idReceiver === idSender ? "flex-start" : "flex-end",
                     marginHorizontal: 10,
@@ -211,7 +211,7 @@ export default function Chat({ navigation, route }) {
                 >
                   <Text
                     style={{
-                      color: "#fff",
+                      color:  item.idReceiver === idSender ? "black" : "white",
                       fontSize: 16,
                     }}
                   >
@@ -219,7 +219,7 @@ export default function Chat({ navigation, route }) {
                   </Text>
                   <Text
                     style={{
-                      color: "#dfe4ea",
+                      color:  item.idReceiver === idSender ? "black" : "white",
                       fontSize: 14,
                       alignSelf: "flex-end",
                     }}
@@ -234,8 +234,14 @@ export default function Chat({ navigation, route }) {
 
         {console.log("isTyping-" + isTyping)}
         {isTyping ? (
-          <View>
-            <Text style={styles.text}>mohamed hedi is typing</Text>
+          <View style={styles.typingContainer}>
+            <Animatable.Text
+              animation="flash" // You can choose a different animation from the library
+              iterationCount="infinite" // Repeat the animation indefinitely
+              style={styles.typingText}
+            >
+              {userReceiver.nom} is typing ...
+            </Animatable.Text>
           </View>
         ) : undefined}
 
@@ -315,8 +321,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   stateContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   statePoint: {
     width: 10,
@@ -325,9 +331,20 @@ const styles = StyleSheet.create({
     marginRight: 5, // Adjust the margin as needed
   },
   offlinePoint: {
-    backgroundColor: 'red',
+    backgroundColor: "red",
   },
   onlinePoint: {
-    backgroundColor: 'green',
+    backgroundColor: "green",
+  },
+  typingContainer: {
+    backgroundColor: "#f0f0f0", // Background color for the typing indicator container
+    padding: 10,
+    borderRadius: 8,
+    marginBottom: 10, // Adjust the margin as needed
+    alignSelf: "flex-start", // Align the container to the start of the parent (left in LTR languages)
+  },
+  typingText: {
+    color: "#333", // Text color
+    fontStyle: "italic", // Italicize the text to indicate a temporary status
   },
 });
