@@ -124,15 +124,30 @@ export default function Chat({ navigation, route }) {
         </View>
       ),
       headerRight: () => (
-        <TouchableOpacity
-          style={{ paddingRight: 10 }}
-          onPress={() => {
-            console.log(userReceiver);
-            Linking.openURL(`tel:${userReceiver.numero}`);
-          }}
-        >
-          <Icon name="call" size={28} color="black" />
-        </TouchableOpacity>
+<React.Fragment>
+      <TouchableOpacity
+        style={{ paddingRight: 10 }}
+        onPress={() => {
+          console.log(userReceiver);
+          Linking.openURL(`tel:${userReceiver.numero}`);
+        }}
+      >
+        <Icon name="call" size={28} color="black" />
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={{ paddingRight: 10 }}
+        onPress={() => {
+          // Handle video call logic
+navigation.navigate("VideoCall" , {
+  info:{userId: idSender,
+    callId: idDiscu,
+    username: "Mohamed"}
+})        }}
+      >
+        <Icon name="videocam" size={28} color="black" />
+      </TouchableOpacity>
+    </React.Fragment>
       ),
     });
 

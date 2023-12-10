@@ -14,7 +14,6 @@ import { useState, useEffect } from "react";
 import firebase from "../config";
 import * as ImagePicker from "expo-image-picker";
 import Modal from 'react-native-modal';
-// import { Audio } from  'react-loader-spinner'
 
 
 export default function Profile() {
