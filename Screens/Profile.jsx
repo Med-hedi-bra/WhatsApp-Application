@@ -265,3 +265,12 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
 });
+
+
+
+// const userID = props.route.params.info.userId;
+// const userName = props.route.params.info.username;
+// const callID = props.route.params.info.callId;
+// const AppId = "300883860"
+// const AppSign = "26eb9a7e672adc71b7446345f03f8e64d2972403524158a61db25ffd38a2dff1"
+// console.log("props",userID,userName,callID)

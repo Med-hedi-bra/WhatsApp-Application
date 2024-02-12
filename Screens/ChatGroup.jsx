@@ -152,6 +152,7 @@ const ChatGroup = (props) => {
       console.log("*********member", member.id);
     }
   });
+
   return (
     <TouchableWithoutFeedback
       onPress={() => {
@@ -168,21 +169,25 @@ const ChatGroup = (props) => {
               <View style={{ marginTop: 6 }}>
                 <View style={{ marginTop: 6 }}>
                   <View style={styles.container}>
-                  {groupe.members.map((member) => {
-                        if (member && member.id === item.idSender) {
-                          return (
-                            <View
-                              key={member.id}
-                              style={[styles.senderNameContainer,{marginLeft: 10}]}
-                            >
-                              <Text style={{ color: "#000", fontSize: 14 }}>
-                                {member.nom}
-                              </Text>
-                            </View>
-                          );
-                        }
-                        return null;
-                      })}
+                    {groupe.members.map((member) => {
+                      if (member && member.id === item.idSender) {
+                        return (
+                          <View
+                            key={member.id}
+                            style={[
+                              styles.senderNameContainer,
+                              { marginLeft: 10 },
+                            ]}
+                          >
+                            <Text style={{ color: "#000", fontSize: 14 }}>
+                              {member.nom}
+                            </Text>
+                          </View>
+                        );
+                      }
+                      return null;
+                    })}
+
                     <View
                       style={[
                         styles.messageContainer,
@@ -194,8 +199,6 @@ const ChatGroup = (props) => {
                         },
                       ]}
                     >
-                     
-
                       <View
                         style={[
                           styles.messageContent,
